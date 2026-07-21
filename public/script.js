@@ -54,7 +54,44 @@ async function loadPlayersFromGoogle() {
 
         }));
 
-        loadPlayersFromGoogle();
+       async function loadPlayersFromGoogle() {
+
+    try {
+
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbxnepH5bglAVBTaeUBddyb-U8ptc7s3PpurUYRLRFGUG3jNfC2druVqQ--9wt0vqtaPpg/exec"
+        );
+
+
+        const data = await response.json();
+
+
+        players = data.map(player => ({
+
+            id: createID(),
+
+            ign: player.ign,
+
+            class: player.class,
+
+            role: player.role
+
+        }));
+
+
+        renderPlayers();
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Unable to load Google Sheet.");
+
+    }
+
 
     }
 
@@ -262,7 +299,7 @@ searchInput.onkeyup=()=>{
 // START
 // ================================
 
-renderPlayers();
+loadPlayersFromGoogle();
 
 // ================================
 // RAID GENERATOR
