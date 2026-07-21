@@ -364,9 +364,11 @@ function makeRaidPlayer(card){
 
         card.appendChild(actionDiv);
 
-        playersContainer.appendChild(card);
+        const oldTeam = card.parentElement;
 
-        updateTeamCount(card.parentElement);
+playersContainer.appendChild(card);
+
+updateTeamCount(oldTeam);
 
     };
 
@@ -374,52 +376,7 @@ function makeRaidPlayer(card){
 
 }
 
-new Sortable(playersContainer,{
-    group:"players",
-    animation:150,
-    sort:false
-});
 
-document.querySelectorAll(".teamPlayers").forEach(team=>{
 
-    new Sortable(team,{
-
-        group:"players",
-
-        animation:150,
-
-        onAdd:function(evt){
-
-            if(team.children.length > 5){
-
-                evt.from.appendChild(evt.item);
-
-                return;
-
-            }
-
-            makeRaidPlayer(evt.item);
-
-            updateTeamCount(team);
-
-        },
-
-        onRemove:function(){
-
-            updateTeamCount(team);
-
-        }
-
-    });
-
-});
-
-    new Sortable(team,{
-
-        group:"players",
-
-        animation:150
-
-    });
 
 });
