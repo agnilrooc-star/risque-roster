@@ -373,20 +373,20 @@ const raids = [
 
 function generateRaids(){
 
-    rosterContainer.innerHTML="";
+    rosterContainer.innerHTML = "";
 
 
-    raids.forEach(raid=>{
+    raids.forEach(raid => {
 
 
-        const raidBox=document.createElement("div");
+        const raidBox = document.createElement("div");
 
 
-        raidBox.className=`raid ${raid.className}`;
+        raidBox.className = "raid " + raid.className;
 
 
 
-        raidBox.innerHTML=`
+        raidBox.innerHTML = `
 
             <h2>${raid.name}</h2>
 
@@ -394,23 +394,24 @@ function generateRaids(){
 
 
 
-        const grid=document.createElement("div");
+        const grid = document.createElement("div");
 
 
-        grid.className="teamGrid";
+        grid.className = "teamGrid";
 
 
 
-        for(let i=1;i<=raid.teams;i++){
+        for(let i = 1; i <= raid.teams; i++){
 
 
-            const team=document.createElement("div");
+            const team = document.createElement("div");
 
 
-            team.className="team";
+            team.className = "team";
 
 
-            team.innerHTML=`
+
+            team.innerHTML = `
 
                 <h3>
 
@@ -444,10 +445,13 @@ function generateRaids(){
     });
 
 
-
 }
 
-            
+
+
+// CREATE RAID DISPLAY
+
+generateRaids();
 
 
 // =======================
