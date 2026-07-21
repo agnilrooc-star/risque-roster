@@ -309,17 +309,110 @@ generateRaids();
 // DRAG & DROP
 // =======================
 
+function updateTeamCount(teamContainer){
+
+    const team = teamContainer.closest(".team");
+
+    const count = teamContainer.querySelectorAll(".raid-player").length;
+
+    team.querySelector(".count").innerText = `(${count}/5)`;
+
+}
+
+function makeRaidPlayer(card){
+
+    // Already converted
+    if(card.classList.contains("raid-player")) return;
+
+    card.classList.add("raid-player");
+
+    // Remove edit/delete buttons
+    const actions = card.querySelector(".player-actions");
+
+    if(actions){
+        actions.remove();
+    }
+
+    // Create remove button
+    const removeBtn = document.createElement("button");
+
+    removeBtn.innerText = "❌";
+
+    removeBtn.className = "delete-btn";
+
+    removeBtn.onclick = () => {
+
+        card.classList.remove("raid-player");
+
+        removeBtn.remove();
+
+        // Restore buttons
+        const actionDiv = document.createElement("div");
+
+        actionDiv.className = "player-actions";
+
+        actionDiv.innerHTML = `
+            <button class="edit-btn">✏</button>
+            <button class="delete-btn">🗑</button>
+        `;
+
+        const id = card.dataset.id;
+
+        actionDiv.querySelector(".edit-btn").onclick = () => editPlayer(id);
+
+        actionDiv.querySelector(".delete-btn").onclick = () => deletePlayer(id);
+
+        card.appendChild(actionDiv);
+
+        playersContainer.appendChild(card);
+
+        updateTeamCount(card.parentElement);
+
+    };
+
+    card.appendChild(removeBtn);
+
+}
+
 new Sortable(playersContainer,{
-
     group:"players",
-
     animation:150,
-
     sort:false
-
 });
 
 document.querySelectorAll(".teamPlayers").forEach(team=>{
+
+    new Sortable(team,{
+
+        group:"players",
+
+        animation:150,
+
+        onAdd:function(evt){
+
+            if(team.children.length > 5){
+
+                evt.from.appendChild(evt.item);
+
+                return;
+
+            }
+
+            makeRaidPlayer(evt.item);
+
+            updateTeamCount(team);
+
+        },
+
+        onRemove:function(){
+
+            updateTeamCount(team);
+
+        }
+
+    });
+
+});
 
     new Sortable(team,{
 
