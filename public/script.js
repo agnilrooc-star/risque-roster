@@ -92,17 +92,6 @@ async function loadPlayersFromGoogle() {
 
     }
 
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert("Unable to load Google Sheet.");
-
-    }
-
 }
 
 // ================================
@@ -298,6 +287,9 @@ searchInput.onkeyup=()=>{
 // ================================
 // START
 // ================================
+
+
+generateRaids();
 
 loadPlayersFromGoogle();
 
