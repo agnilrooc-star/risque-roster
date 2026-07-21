@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risque Guild Roster</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
+
 <body>
 
-<h1>Risque Guild Roster</h1>
+<header>
+    <h1>RISQUE GUILD ROSTER</h1>
+</header>
 
-<p>If you can see this, the server is working.</p>
+<div class="container">
+
+    <aside id="playersPanel">
+
+        <h2>Available Players</h2>
+
+        <div id="players"></div>
+
+    </aside>
+
+    <main id="rosters">
+
+    </main>
+
+</div>
+
+<script src="players.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
