@@ -340,46 +340,75 @@ loadPlayersFromGoogle();
 
 const rosterContainer = document.getElementById("rosters");
 
+
 const raids = [
+
     {
         name: "Raid 1",
-        teams: 6
+        teams: 6,
+        className: "raid-one"
     },
+
     {
         name: "Raid 2",
-        teams: 2
+        teams: 2,
+        className: "raid-small"
     },
+
     {
         name: "Raid 3",
-        teams: 2
+        teams: 2,
+        className: "raid-small"
     },
+
     {
         name: "Roaming Party",
-        teams: 2
+        teams: 2,
+        className: "raid-small"
     }
+
 ];
+
+
 
 function generateRaids(){
 
     rosterContainer.innerHTML="";
 
+
     raids.forEach(raid=>{
+
 
         const raidBox=document.createElement("div");
 
-        raidBox.className="raid";
 
-        raidBox.innerHTML=`<h2>${raid.name}</h2>`;
+        raidBox.className=`raid ${raid.className}`;
+
+
+
+        raidBox.innerHTML=`
+
+            <h2>${raid.name}</h2>
+
+        `;
+
+
 
         const grid=document.createElement("div");
 
+
         grid.className="teamGrid";
+
+
 
         for(let i=1;i<=raid.teams;i++){
 
+
             const team=document.createElement("div");
 
+
             team.className="team";
+
 
             team.innerHTML=`
 
@@ -391,27 +420,40 @@ function generateRaids(){
 
                 </h3>
 
+
                 <div class="teamPlayers"></div>
 
             `;
 
+
+
             grid.appendChild(team);
+
 
         }
 
+
+
         raidBox.appendChild(grid);
+
 
         rosterContainer.appendChild(raidBox);
 
+
+
     });
+
+
 
 }
 
-generateRaids();
+            
+
 
 // =======================
 // DRAG & DROP
 // =======================
+
 
 new Sortable(playersContainer,{
 
@@ -423,14 +465,54 @@ new Sortable(playersContainer,{
 
 });
 
+
+
 document.querySelectorAll(".teamPlayers").forEach(team=>{
+
 
     new Sortable(team,{
 
         group:"players",
 
-        animation:150
+        animation:150,
+
+
+        onAdd:function(evt){
+
+
+            // LIMIT TEAM TO 5 PLAYERS
+
+            if(team.children.length > 5){
+
+
+                evt.from.appendChild(evt.item);
+
+
+                return;
+
+
+            }
+
+
+        },
+
+
+        onMove:function(evt){
+
+
+            return true;
+
+
+        },
+
+
+        onRemove:function(evt){
+
+
+        }
+
 
     });
+
 
 });
