@@ -1,30 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Risque Guild Roster</title>
 
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
 </head>
 
 <body>
 
 <header>
+
     <h1>RISQUE GUILD ROSTER</h1>
+
 </header>
 
 <div class="container">
+
+    <!-- LEFT PANEL -->
 
     <aside id="playersPanel">
 
         <h2>Available Players</h2>
 
+        <div class="playerForm">
+
+            <input
+                id="playerName"
+                type="text"
+                placeholder="Player Name"
+            >
+
+            <select id="playerRole">
+
+                <option value="Tank">🛡 Tank</option>
+
+                <option value="DPS">⚔ DPS</option>
+
+                <option value="Healer">💚 Healer</option>
+
+                <option value="Support">✨ Support</option>
+
+            </select>
+
+            <button id="addPlayerBtn">
+
+                + Add Player
+
+            </button>
+
+            <input
+                id="searchPlayer"
+                type="text"
+                placeholder="Search Player..."
+            >
+
+        </div>
+
         <div id="players"></div>
 
     </aside>
+
+    <!-- RIGHT PANEL -->
 
     <main id="rosters">
 
@@ -32,8 +77,8 @@
 
 </div>
 
-<script src="players.js"></script>
 <script src="script.js"></script>
 
 </body>
+
 </html>
