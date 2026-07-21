@@ -57,19 +57,21 @@ function renderPlayers(filter=""){
 
     players
 
-    .filter(player=>{
+    .filter(player=>
 
-        return player.ign
+        player.ign
         .toLowerCase()
-        .includes(filter.toLowerCase());
+        .includes(filter.toLowerCase())
 
-    })
+    )
 
     .forEach(player=>{
 
         const card=document.createElement("div");
 
         card.className="player";
+
+        card.dataset.id=player.id;
 
         card.innerHTML=`
 
@@ -82,18 +84,16 @@ function renderPlayers(filter=""){
             <div class="player-actions">
 
                 <button
-                    class="edit-btn"
-                    onclick="editPlayer('${player.id}')">
+                class="edit-btn">
 
-                    ✏
+                ✏
 
                 </button>
 
                 <button
-                    class="delete-btn"
-                    onclick="deletePlayer('${player.id}')">
+                class="delete-btn">
 
-                    🗑
+                🗑
 
                 </button>
 
@@ -101,12 +101,15 @@ function renderPlayers(filter=""){
 
         `;
 
+        card.querySelector(".edit-btn").onclick=()=>editPlayer(player.id);
+
+        card.querySelector(".delete-btn").onclick=()=>deletePlayer(player.id);
+
         playersContainer.appendChild(card);
 
     });
 
 }
-
 
 
 // ================================
@@ -254,41 +257,39 @@ const raids = [
 
 function generateRaids(){
 
-    rosterContainer.innerHTML = "";
+    rosterContainer.innerHTML="";
 
     raids.forEach(raid=>{
 
-        const raidBox = document.createElement("div");
+        const raidBox=document.createElement("div");
 
-        raidBox.className = "raid";
+        raidBox.className="raid";
 
-        raidBox.innerHTML = `
-            <h2>${raid.name}</h2>
-        `;
+        raidBox.innerHTML=`<h2>${raid.name}</h2>`;
 
-        const grid = document.createElement("div");
+        const grid=document.createElement("div");
 
-        grid.className = "teamGrid";
+        grid.className="teamGrid";
 
         for(let i=1;i<=raid.teams;i++){
 
-            const team = document.createElement("div");
+            const team=document.createElement("div");
 
-            team.className = "team";
+            team.className="team";
 
-            team.innerHTML = `
-                <h3>Team ${i}</h3>
+            team.innerHTML=`
+
+                <h3>
+
+                    Team ${i}
+
+                    <span class="count">(0/5)</span>
+
+                </h3>
+
+                <div class="teamPlayers"></div>
+
             `;
-
-            for(let x=0;x<5;x++){
-
-                const slot=document.createElement("div");
-
-                slot.className="slot";
-
-                team.appendChild(slot);
-
-            }
 
             grid.appendChild(team);
 
@@ -303,3 +304,29 @@ function generateRaids(){
 }
 
 generateRaids();
+
+// =======================
+// DRAG & DROP
+// =======================
+
+new Sortable(playersContainer,{
+
+    group:"players",
+
+    animation:150,
+
+    sort:false
+
+});
+
+document.querySelectorAll(".teamPlayers").forEach(team=>{
+
+    new Sortable(team,{
+
+        group:"players",
+
+        animation:150
+
+    });
+
+});
