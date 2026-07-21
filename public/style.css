@@ -3,6 +3,7 @@
    VERSION 1
 =========================== */
 
+
 *{
     margin:0;
     padding:0;
@@ -10,58 +11,91 @@
     font-family:Arial,Helvetica,sans-serif;
 }
 
+
 body{
+
     background:#0f172a;
     color:#fff;
+
 }
 
+
+
 header{
+
     background:#111827;
     padding:20px;
     text-align:center;
     border-bottom:2px solid #22c55e;
+
 }
 
+
 header h1{
+
     color:#22c55e;
     font-size:32px;
     letter-spacing:2px;
+
 }
 
+
+
 .container{
+
     display:flex;
     height:calc(100vh - 80px);
+
 }
+
+
 
 /* ===========================
 LEFT PANEL
 =========================== */
 
+
 #playersPanel{
+
     width:340px;
     background:#1e293b;
     padding:20px;
     overflow-y:auto;
     border-right:2px solid #334155;
+
 }
+
+
 
 #playersPanel h2{
+
     margin-bottom:20px;
     color:#22c55e;
+
 }
 
+
+
 .playerForm{
+
     display:flex;
     flex-direction:column;
     gap:10px;
     margin-bottom:20px;
+
 }
 
+
+
 .playerForm label{
+
     font-size:13px;
     color:#cbd5e1;
     font-weight:bold;
+
 }
+
+
 
 .playerForm input,
 .playerForm select{
@@ -72,7 +106,10 @@ LEFT PANEL
     border-radius:8px;
     padding:10px;
     outline:none;
+
 }
+
+
 
 .playerForm input:focus,
 .playerForm select:focus{
@@ -80,6 +117,8 @@ LEFT PANEL
     border-color:#22c55e;
 
 }
+
+
 
 .playerForm button{
 
@@ -90,9 +129,10 @@ LEFT PANEL
     padding:12px;
     cursor:pointer;
     font-weight:bold;
-    transition:.2s;
 
 }
+
+
 
 .playerForm button:hover{
 
@@ -100,15 +140,20 @@ LEFT PANEL
 
 }
 
+
+
 #searchPlayer{
 
     margin-top:5px;
 
 }
 
+
+
 /* ===========================
 PLAYER LIST
 =========================== */
+
 
 #players{
 
@@ -118,6 +163,8 @@ PLAYER LIST
 
 }
 
+
+
 .player{
 
     background:#334155;
@@ -126,17 +173,19 @@ PLAYER LIST
     display:flex;
     justify-content:space-between;
     align-items:center;
-    transition:.2s;
     cursor:grab;
 
 }
 
+
+
 .player:hover{
 
     background:#475569;
-    transform:translateY(-2px);
 
 }
+
+
 
 .player-name{
 
@@ -145,12 +194,16 @@ PLAYER LIST
 
 }
 
+
+
 .player-actions{
 
     display:flex;
     gap:8px;
 
 }
+
+
 
 .edit-btn,
 .delete-btn{
@@ -159,9 +212,10 @@ PLAYER LIST
     cursor:pointer;
     border-radius:6px;
     padding:6px 8px;
-    font-size:14px;
 
 }
+
+
 
 .edit-btn{
 
@@ -170,11 +224,7 @@ PLAYER LIST
 
 }
 
-.edit-btn:hover{
 
-    background:#2563eb;
-
-}
 
 .delete-btn{
 
@@ -183,15 +233,12 @@ PLAYER LIST
 
 }
 
-.delete-btn:hover{
 
-    background:#dc2626;
-
-}
 
 /* ===========================
 RIGHT PANEL
 =========================== */
+
 
 #rosters{
 
@@ -199,44 +246,117 @@ RIGHT PANEL
     overflow-y:auto;
     padding:20px;
 
+
+    /* NEW RAID LAYOUT */
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    align-items:start;
+
 }
+
+
+
+/* ===========================
+RAIDS
+=========================== */
+
 
 .raid{
 
-    margin-bottom:40px;
+    background:#111827;
+    border-radius:12px;
+    padding:15px;
 
 }
+
+
 
 .raid h2{
 
     color:#22c55e;
     margin-bottom:15px;
+    text-align:center;
 
 }
+
+
+
+/* RAID 1 FULL WIDTH */
+
+.raid-one{
+
+    grid-column:1 / -1;
+
+}
+
+
+
+/* RAID 2 / 3 / ROAMING */
+
+.raid-small{
+
+    grid-column:auto;
+
+}
+
+
+
+/* ===========================
+TEAM GRID
+=========================== */
+
 
 .teamGrid{
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    grid-template-columns:repeat(3,1fr);
+
     gap:15px;
 
 }
 
+
+
+/* Smaller raid groups */
+
+
+.raid-small .teamGrid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+
+
 .team{
 
     background:#1e293b;
+
     border:2px solid #334155;
+
     border-radius:12px;
+
     padding:15px;
-    transition:.2s;
+
+    min-height:180px;
 
 }
+
+
 
 .team:hover{
 
     border-color:#22c55e;
 
 }
+
+
 
 .team h3{
 
@@ -245,26 +365,52 @@ RIGHT PANEL
 
 }
 
-.slot{
 
-    background:#0f172a;
-    border:1px dashed #475569;
-    border-radius:8px;
-    min-height:42px;
-    margin-bottom:8px;
-    padding:6px;
+
+/* PLAYER DROP AREA */
+
+.teamPlayers{
+
+    min-height:120px;
+
+    padding:5px;
 
 }
+
+
+
+/* ===========================
+DRAG PLAYER
+=========================== */
+
+
+.player{
+
+    user-select:none;
+
+}
+
+
+
+.player:active{
+
+    cursor:grabbing;
+
+}
+
+
 
 /* ===========================
 SCROLLBAR
 =========================== */
+
 
 ::-webkit-scrollbar{
 
     width:8px;
 
 }
+
 
 ::-webkit-scrollbar-thumb{
 
@@ -273,17 +419,15 @@ SCROLLBAR
 
 }
 
-::-webkit-scrollbar-thumb:hover{
 
-    background:#64748b;
-
-}
 
 /* ===========================
 MOBILE
 =========================== */
 
+
 @media(max-width:900px){
+
 
 .container{
 
@@ -291,13 +435,34 @@ MOBILE
 
 }
 
+
+
 #playersPanel{
 
     width:100%;
+
     height:auto;
+
     border-right:none;
-    border-bottom:2px solid #334155;
 
 }
+
+
+
+#rosters{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.teamGrid{
+
+    grid-template-columns:1fr;
+
+}
+
+
 
 }
