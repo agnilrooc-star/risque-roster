@@ -91,12 +91,51 @@ function createID(){
 
 
 // ================================
+// CLASS COLOR
+// ================================
+
+function getClassColor(playerClass){
+
+    switch(playerClass){
+
+        case "Priest":
+            return "#c5d89d"; // Cyan
+
+        case "Knight":
+            return "#ea7b7b"; // Blue
+
+        case "Blacksmith":
+            return "#ffa239"; // Gold
+
+        case "Wizard":
+            return "#b4e1eb"; // Purple
+
+        case "Hunter":
+            return "#fff6a1"; // Green
+
+        case "GS":
+            return "#9b8ec7"; // Red
+
+        case "Druid":
+            return "#434e78"; // Lime
+
+        default:
+            return "#ffffff"; // White
+
+    }
+
+}
+
+
+
+// ================================
 // RENDER
 // ================================
 
 function renderPlayers(filter=""){
 
     playersContainer.innerHTML="";
+
 
     players
 
@@ -108,21 +147,29 @@ function renderPlayers(filter=""){
 
     )
 
+
     .forEach(player=>{
+
 
         const card=document.createElement("div");
 
+
         card.className="player";
+
 
         card.dataset.id=player.id;
 
+
         card.innerHTML=`
 
-            <div class="player-name">
+            <div 
+            class="player-name"
+            style="color:${getClassColor(player.class)}">
 
                 ${player.ign}
 
             </div>
+
 
             <div class="player-actions">
 
@@ -132,6 +179,7 @@ function renderPlayers(filter=""){
                 ✏
 
                 </button>
+
 
                 <button
                 class="delete-btn">
@@ -144,16 +192,29 @@ function renderPlayers(filter=""){
 
         `;
 
-        card.querySelector(".edit-btn").onclick=()=>editPlayer(player.id);
 
-        card.querySelector(".delete-btn").onclick=()=>deletePlayer(player.id);
+
+        card.querySelector(".edit-btn").onclick=()=>{
+
+            editPlayer(player.id);
+
+        };
+
+
+
+        card.querySelector(".delete-btn").onclick=()=>{
+
+            deletePlayer(player.id);
+
+        };
+
 
         playersContainer.appendChild(card);
+
 
     });
 
 }
-
 
 // ================================
 // ADD PLAYER
