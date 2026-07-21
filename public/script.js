@@ -309,74 +309,24 @@ generateRaids();
 // DRAG & DROP
 // =======================
 
-function updateTeamCount(teamContainer){
+new Sortable(playersContainer,{
 
-    const team = teamContainer.closest(".team");
+    group:"players",
 
-    const count = teamContainer.querySelectorAll(".raid-player").length;
+    animation:150,
 
-    team.querySelector(".count").innerText = `(${count}/5)`;
+    sort:false
 
-}
+});
 
-function makeRaidPlayer(card){
+document.querySelectorAll(".teamPlayers").forEach(team=>{
 
-    // Already converted
-    if(card.classList.contains("raid-player")) return;
+    new Sortable(team,{
 
-    card.classList.add("raid-player");
+        group:"players",
 
-    // Remove edit/delete buttons
-    const actions = card.querySelector(".player-actions");
+        animation:150
 
-    if(actions){
-        actions.remove();
-    }
-
-    // Create remove button
-    const removeBtn = document.createElement("button");
-
-    removeBtn.innerText = "❌";
-
-    removeBtn.className = "delete-btn";
-
-    removeBtn.onclick = () => {
-
-        card.classList.remove("raid-player");
-
-        removeBtn.remove();
-
-        // Restore buttons
-        const actionDiv = document.createElement("div");
-
-        actionDiv.className = "player-actions";
-
-        actionDiv.innerHTML = `
-            <button class="edit-btn">✏</button>
-            <button class="delete-btn">🗑</button>
-        `;
-
-        const id = card.dataset.id;
-
-        actionDiv.querySelector(".edit-btn").onclick = () => editPlayer(id);
-
-        actionDiv.querySelector(".delete-btn").onclick = () => deletePlayer(id);
-
-        card.appendChild(actionDiv);
-
-        const oldTeam = card.parentElement;
-
-playersContainer.appendChild(card);
-
-updateTeamCount(oldTeam);
-
-    };
-
-    card.appendChild(removeBtn);
-
-}
-
-
-
+    });
 
 });
